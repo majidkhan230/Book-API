@@ -1,6 +1,6 @@
-import { bookList } from "../data/bookList.js";
+import bookList from "../data/bookList";
 
-export const getAllBooks = (req, res) => {
+  const getAllBooks = (req, res) => {
   try {
     res.status(200).json({
       message: "welcome to all books file",
@@ -13,7 +13,7 @@ export const getAllBooks = (req, res) => {
     });
   }
 };
-export const createBookDetails = (req, res) => {
+ const createBookDetails = (req, res) => {
   try {
     const book = req.body;
     bookList.push(book);
@@ -25,7 +25,7 @@ export const createBookDetails = (req, res) => {
     });
   }
 };
-export const updateBookById = (req, res) => {
+ const updateBookById = (req, res) => {
   try {
     const id = req.params.id;
 
@@ -44,7 +44,12 @@ export const updateBookById = (req, res) => {
     });
   }
 };
-export const DeleteBookById = (req, res) => {
+ const DeleteBookById = (req, res) => {
   
 
 };
+
+
+const bookController = {getAllBooks,createBookDetails,updateBookById,DeleteBookById}
+
+export default bookController;

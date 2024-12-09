@@ -1,4 +1,4 @@
-export const bookList = [
+ const bookList = [
     {
       "id": 1,
       "name": "The Russian",
@@ -141,3 +141,5 @@ export const bookList = [
     }
   ]
   
+
+  export default bookList;
