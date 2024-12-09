@@ -1,4 +1,4 @@
-import bookList from "../data/bookList";
+import bookList from "../data/bookList.js";
 
   const getAllBooks = (req, res) => {
   try {
