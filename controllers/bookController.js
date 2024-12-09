@@ -13,6 +13,28 @@ import bookList from "../data/bookList.js";
     });
   }
 };
+
+const getBookByID = (req,res){
+  try {
+    const id = req.params.id;
+
+  const filterById=  bookList.find((item)=>{
+      item.id == parseInt(id)
+    })
+
+    res.status(200).json({
+      message: "welcome to all books file",
+      book:filterById,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "something went wrong with server",
+      error: error.message,
+    });
+  }
+  
+}
+
  const createBookDetails = (req, res) => {
   try {
     const book = req.body;
