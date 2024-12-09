@@ -14,16 +14,16 @@ import bookList from "../data/bookList.js";
   }
 };
 
-const getBookByID = (req,res){
+const getBookByID = (req,res)=>{
   try {
     const id = req.params.id;
 
-  const filterById=  bookList.find((item)=>{
-      item.id == parseInt(id)
-    })
-
+  const filterById=  bookList.find((item)=>(
+      item.id == id
+   ) )
+console.log(filterById)
     res.status(200).json({
-      message: "welcome to all books file",
+      message: "book filter by id",
       book:filterById,
     });
   } catch (error) {
@@ -72,6 +72,6 @@ const getBookByID = (req,res){
 };
 
 
-const bookController = {getAllBooks,createBookDetails,updateBookById,DeleteBookById}
+const bookController = {getAllBooks,createBookDetails,updateBookById,DeleteBookById,getBookByID}
 
 export default bookController;

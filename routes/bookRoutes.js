@@ -6,7 +6,8 @@ const bookRoutes = express.Router();
 
 
 bookRoutes.get("/",bookController.getAllBooks)
-bookRoutes.get("/",bookController.createBookDetails)
+bookRoutes.get("/:id",bookController.getBookByID)
+bookRoutes.post("/",bookController.createBookDetails)
 bookRoutes.put("/:id",bookController.updateBookById)
 bookRoutes.delete("/:author",bookController.DeleteBookById)
 
