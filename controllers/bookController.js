@@ -1,5 +1,8 @@
 import bookList from "../data/bookList.js";
 
+
+
+// getALLBooks
   const getAllBooks = (req, res) => {
   try {
     res.status(200).json({
@@ -13,7 +16,7 @@ import bookList from "../data/bookList.js";
     });
   }
 };
-
+//getBookByID
 const getBookByID = (req,res)=>{
   try {
     const id = req.params.id;
@@ -36,8 +39,8 @@ console.log(filterById)
 }
 
  const createBookDetails = (req, res) => {
+   const book = req.body;
   try {
-    const book = req.body;
     bookList.push(book);
     res.status(201).send({ message: "sucessfully created", books: bookList });
   } catch (error) {
@@ -46,18 +49,19 @@ console.log(filterById)
       error: error.message,
     });
   }
+  
 };
+
+// UpdateByID
  const updateBookById = (req, res) => {
-  try {
-    const id = req.params.id;
-
-  const filterById=  bookList.find((item)=>{
-      item.id == parseInt(id)
-    })
-
+   try {
+     const id = req.params.id;
+    const bookIndex = bookList.findIndex((item)=>(  item.id ==  id))
+    
+    bookList[bookIndex] = {...bookList[bookIndex],...req.body}
     res.status(200).json({
       message: "welcome to all books file",
-      book:filterById,
+      book:bookList,
     });
   } catch (error) {
     res.status(500).json({
@@ -66,6 +70,11 @@ console.log(filterById)
     });
   }
 };
+
+
+
+
+
  const DeleteBookById = (req, res) => {
   
 
