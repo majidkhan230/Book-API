@@ -57,7 +57,9 @@ console.log(filterById)
    try {
      const id = req.params.id;
     const bookIndex = bookList.findIndex((item)=>(  item.id ==  id))
-    
+    if (bookIndex === -1) {
+      return res.status(404).json({ message: "Book not found" });
+    }
     bookList[bookIndex] = {...bookList[bookIndex],...req.body}
     res.status(200).json({
       message: "welcome to all books file",
@@ -76,6 +78,20 @@ console.log(filterById)
 
 
  const DeleteBookById = (req, res) => {
+  try {
+  const id = req.params.id
+   const bookIndex = bookList.findIndex((item)=>(item.id == id))
+   if (bookIndex === -1) {
+    return res.status(404).json({ message: "Book not found" });
+  }
+   bookList.splice(bookIndex,1)
+res.status(200).json(bookList)
+ } catch (error) {
+   res.status(500).json({
+     message: "something went wrong with server",
+     error: error.message,
+   });
+ }
   
 
 };
