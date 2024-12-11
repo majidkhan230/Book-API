@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const userSchema = new Schema(
   {
     username: {
-      type: Sting,
+      type: String,
       required: true,
       unique: true,
       lowercase: true,
