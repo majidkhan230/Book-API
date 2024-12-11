@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
- const app = express();
+import mongoose from "mongoose";
+const app = express();
 
 dotenv.config();
 app.use(express.json());
@@ -19,3 +20,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`server is sucessfully running on ${PORT}`);
 });
+
+mongoose
+  .connect(
+    process.env.MONGODB_URI
+  )
+  .then(()=>(console.log("connection sucessfully established")))
+  .catch(()=>(console.log("failed to connect to db")));
