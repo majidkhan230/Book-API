@@ -1,18 +1,14 @@
-import bookList from "../data/bookList.js";
 import { Book } from "../model/book.model.js";
 
 // getALLBooks
-const getAllBooks = (req, res) => {
+const getAllBooks = async(req, res) => {
   try {
-    res.status(200).json({
-      message: "welcome to all books file",
-      books: bookList,
-    });
+    const bookList = await Book.find()
+    res.status(200).send({message:"OK",list:bookList})
   } catch (error) {
-    res.status(500).json({
-      message: "something went wrong with server",
-      error: error.message,
-    });
+    res.status(500).send({message:"something went wrong with server",
+      error:error.message
+    })
   }
 };
 //getBookByID
@@ -68,24 +64,34 @@ const createBookDetails = (req, res) => {
 };
 
 // UpdateByID
-const updateBookById = (req, res) => {
+const updateBookById = async(req, res) => {
   try {
-    const id = req.params.id;
-    const bookIndex = bookList.findIndex((item) => item.id == id);
-    if (bookIndex === -1) {
-      return res.status(404).json({ message: "Book not found" });
-    }
-    bookList[bookIndex] = { ...bookList[bookIndex], ...req.body };
-    res.status(200).json({
-      message: "welcome to all books file",
-      book: bookList,
-    });
+    const id = req.params.id
+    const bookUpdated = await Book.findByIdAndUpdate(id,req.body,{new:true})
+    res.status(201).send({message:"sucessfully updated",book:bookUpdated})
   } catch (error) {
-    res.status(500).json({
-      message: "something went wrong with server",
-      error: error.message,
-    });
+    res.status(500).send({message:"something went wrong with server",error:error.message})
   }
+  
+  
+  
+  // try {
+  //   const id = req.params.id;
+  //   const bookIndex = bookList.findIndex((item) => item.id == id);
+  //   if (bookIndex === -1) {
+  //     return res.status(404).json({ message: "Book not found" });
+  //   }
+  //   bookList[bookIndex] = { ...bookList[bookIndex], ...req.body };
+  //   res.status(200).json({
+  //     message: "welcome to all books file",
+  //     book: bookList,
+  //   });
+  // } catch (error) {
+  //   res.status(500).json({
+  //     message: "something went wrong with server",
+  //     error: error.message,
+  //   });
+  // }
 };
 
 const DeleteBookById = (req, res) => {
