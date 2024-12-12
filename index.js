@@ -26,4 +26,4 @@ mongoose
     process.env.MONGODB_URI
   )
   .then(()=>(console.log("connection sucessfully established")))
-  .catch(()=>(console.log("failed to connect to db")));
+  .catch((error)=>({message:"failed to connect to db",error:error.message})));
