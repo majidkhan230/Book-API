@@ -94,15 +94,16 @@ const updateBookById = async(req, res) => {
   // }
 };
 
-const DeleteBookById = (req, res) => {
+const DeleteBookById = async(req, res) => {
   try {
     const id = req.params.id;
-    const bookIndex = bookList.findIndex((item) => item.id == id);
-    if (bookIndex === -1) {
-      return res.status(404).json({ message: "Book not found" });
-    }
-    bookList.splice(bookIndex, 1);
-    res.status(200).json(bookList);
+   await Book.findByIdAndDelete(id)
+    // const bookIndex = bookList.findIndex((item) => item.id == id);
+    // if (bookIndex === -1) {
+    //   return res.status(404).json({ message: "Book not found" });
+    // }
+    // bookList.splice(bookIndex, 1);
+    res.status(200).json({message:"sucessfully deleted ",id:id});
   } catch (error) {
     res.status(500).json({
       message: "something went wrong with server",
