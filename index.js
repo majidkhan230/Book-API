@@ -7,7 +7,6 @@ const app = express();
 
 dotenv.config();
 app.use(express.json());
-
 app.get("/", (req, res) => {
   res.send("welcome to home");
 });
